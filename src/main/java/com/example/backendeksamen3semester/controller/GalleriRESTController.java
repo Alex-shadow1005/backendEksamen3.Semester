@@ -52,5 +52,16 @@ public class GalleriRESTController {
                 .body(ImageUtility.decompressImage(dbImage.get().getImage()));
     }
 
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<String> deleteImage(@PathVariable Integer id) {
+        try {
+            galleriRepository.deleteById(id);
+            return new ResponseEntity<>("Slettet id=" + id, HttpStatus.OK);
+        } catch (Exception err){
+            return new ResponseEntity<>("Jeg kunnne ikke slet id=" + id, HttpStatus.NOT_FOUND);
+        }
+
+    }
+
 }
 
