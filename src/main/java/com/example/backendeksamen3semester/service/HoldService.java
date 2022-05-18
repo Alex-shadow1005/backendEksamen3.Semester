@@ -42,6 +42,10 @@ public class HoldService {
         return holdRepository.findByName(name);
     }
 
+    public Optional<Hold> getHoldId(Long id) throws IOException {
+        return holdRepository.findById(id);
+    }
+
     public void deleteHold(Long id){
         holdRepository.deleteById(id);
     }

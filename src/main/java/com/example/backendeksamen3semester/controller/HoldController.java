@@ -2,6 +2,7 @@ package com.example.backendeksamen3semester.controller;
 
 import com.example.backendeksamen3semester.Utils.ImageUtility;
 import com.example.backendeksamen3semester.model.Hold;
+import com.example.backendeksamen3semester.repository.HoldRepository;
 import com.example.backendeksamen3semester.service.HoldService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,6 +21,7 @@ import java.util.Optional;
 public class HoldController {
 
     private final HoldService holdService;
+    private HoldRepository holdRepository;
 
     @Autowired
     public HoldController(HoldService holdService){
@@ -45,6 +47,16 @@ public class HoldController {
                 .ok()
                 .contentType(MediaType.valueOf(hold.get().getType()))
                 .body(ImageUtility.decompressImage(hold.get().getHoldImage()));
+    }
+
+    @GetMapping("/{id}")
+    public Hold findHoldById(@PathVariable Long id) throws IOException {
+        Optional<Hold> obj = holdService.getHoldId(id);
+        if (obj.isPresent()) {
+            return obj.get();
+        } else {
+            return null;
+        }
     }
 
     @PutMapping("/{id}")
