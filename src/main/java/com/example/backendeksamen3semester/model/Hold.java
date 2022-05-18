@@ -1,9 +1,17 @@
 package com.example.backendeksamen3semester.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 import java.util.Arrays;
 
 @Entity
+@Data
+@Builder
+
 public class Hold {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
@@ -18,18 +26,40 @@ public class Hold {
     @Column(name="antal_kursister")
     private String antalKursister;
 
+    private String type;
+    @Column(name = "hold_image", unique = false, nullable = false, length = 100000)
+    private byte[] holdImage;
+
 
     public Hold(){
 
     }
 
-    public Hold(Long holdId, String name, String underOverskrift, String tekst, String pris, String antalKursister) {
+    public Hold(Long holdId, String name, String underOverskrift, String tekst, String pris, String antalKursister, String type, byte[] holdImage) {
         this.holdId = holdId;
         this.name = name;
         this.underOverskrift = underOverskrift;
         this.tekst = tekst;
         this.pris = pris;
         this.antalKursister = antalKursister;
+        this.type = type;
+        this.holdImage = holdImage;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public byte[] getHoldImage() {
+        return holdImage;
+    }
+
+    public void setHoldImage(byte[] holdImage) {
+        this.holdImage = holdImage;
     }
 
     public String getAntalKursister() {
