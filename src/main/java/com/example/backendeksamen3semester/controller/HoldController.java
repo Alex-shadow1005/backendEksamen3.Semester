@@ -35,7 +35,7 @@ public class HoldController {
 
     }
 
-    @GetMapping()
+    @GetMapping
     public List<Hold> getHold(){
         return holdService.getallHold();
     }
@@ -50,13 +50,9 @@ public class HoldController {
     }
 
     @GetMapping("/{id}")
-    public Hold findHoldById(@PathVariable Long id) throws IOException {
-        Optional<Hold> obj = holdService.getHoldId(id);
-        if (obj.isPresent()) {
-            return obj.get();
-        } else {
-            return null;
-        }
+    public ResponseEntity<Hold> findHoldById(@PathVariable Long id) throws IOException {
+        holdService.getHoldId(id);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @PutMapping("/{id}")

@@ -11,7 +11,6 @@ import java.util.Arrays;
 @Entity
 @Data
 @Builder
-
 public class Hold {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
