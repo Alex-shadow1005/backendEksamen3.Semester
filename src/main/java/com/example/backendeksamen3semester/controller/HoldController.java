@@ -1,13 +1,18 @@
 package com.example.backendeksamen3semester.controller;
 
+import com.example.backendeksamen3semester.Utils.ImageUtility;
 import com.example.backendeksamen3semester.model.Hold;
 import com.example.backendeksamen3semester.service.HoldService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/hold")
@@ -21,16 +26,25 @@ public class HoldController {
         this.holdService = holdService;
     }
 
-    @PostMapping
-    public ResponseEntity<Hold> createHold(@RequestBody Hold hold){
-        holdService.createHold(hold);
+    @PostMapping("/upload/image")
+    public ResponseEntity<Hold> createHold(@RequestParam("name") String name, @RequestParam("underOverskrift") String underOverskrift, @RequestParam("tekst") String tekst, @RequestParam("pris") String pris, @RequestParam("antalKursister") String antalKursister, @RequestParam("holdImage") MultipartFile holdImage) throws IOException {
+        holdService.createHold(name, underOverskrift, tekst, pris, antalKursister, holdImage);
         return new ResponseEntity<>(HttpStatus.OK);
+
     }
 
-    @GetMapping
-    public ResponseEntity<List<Hold>> getHold(){
-        List<Hold> holdList = holdService.getHold();
-        return new ResponseEntity<>(holdList, HttpStatus.OK);
+    @GetMapping()
+    public List<Hold> getHold(){
+        return holdService.getallHold();
+    }
+
+    @GetMapping("/get/image/{name}")
+    public ResponseEntity<byte[]> getImage(@PathVariable("name") String name) throws IOException {
+        final Optional<Hold> hold = holdService.getHold(name);
+        return ResponseEntity
+                .ok()
+                .contentType(MediaType.valueOf(hold.get().getType()))
+                .body(ImageUtility.decompressImage(hold.get().getHoldImage()));
     }
 
     @PutMapping("/{id}")

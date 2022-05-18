@@ -1,6 +1,7 @@
 package com.example.backendeksamen3semester.Utils;
 
 import java.io.ByteArrayOutputStream;
+import java.util.List;
 import java.util.zip.Deflater;
 import java.util.zip.Inflater;
 
@@ -42,4 +43,5 @@ public class ImageUtility {
         }
         return outputStream.toByteArray();
     }
+
 }
