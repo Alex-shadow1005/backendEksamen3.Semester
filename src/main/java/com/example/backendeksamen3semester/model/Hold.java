@@ -1,7 +1,7 @@
 package com.example.backendeksamen3semester.model;
 
 import javax.persistence.*;
-import java.util.Arrays;
+
 
 @Entity
 public class Hold {

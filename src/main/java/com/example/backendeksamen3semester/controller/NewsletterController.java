@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
+@RequestMapping("/api/nyheder")
 @CrossOrigin(origins = "http://localhost:8080")
 public class NewsletterController {
 

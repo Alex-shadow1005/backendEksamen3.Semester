@@ -3,7 +3,6 @@ package com.example.backendeksamen3semester.service;
 import com.example.backendeksamen3semester.model.Hold;
 import com.example.backendeksamen3semester.repository.HoldRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.AutoConfigurationPackage;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
