@@ -20,10 +20,11 @@ public class Hold {
 
     @Column(name="under_overskrift")
     private String underOverskrift;
+    @Column(name="tekst", length = 8000)
     private String tekst;
     private String pris;
     @Column(name="antal_kursister")
-    private String antalKursister;
+    private int antalKursister;
 
     private String type;
     @Column(name = "hold_image", unique = false, nullable = false, length = 100000)
@@ -34,7 +35,7 @@ public class Hold {
 
     }
 
-    public Hold(Long holdId, String name, String underOverskrift, String tekst, String pris, String antalKursister, String type, byte[] holdImage) {
+    public Hold(Long holdId, String name, String underOverskrift, String tekst, String pris, int antalKursister, String type, byte[] holdImage) {
         this.holdId = holdId;
         this.name = name;
         this.underOverskrift = underOverskrift;
@@ -61,11 +62,11 @@ public class Hold {
         this.holdImage = holdImage;
     }
 
-    public String getAntalKursister() {
+    public int getAntalKursister() {
         return antalKursister;
     }
 
-    public void setAntalKursister(String antalKursister) {
+    public void setAntalKursister(int antalKursister) {
         this.antalKursister = antalKursister;
     }
 

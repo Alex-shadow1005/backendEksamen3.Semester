@@ -22,7 +22,7 @@ public class HoldService {
         this.holdRepository = holdRepository;
     }
 
-    public void createHold(String name, String underOverskrift, String tekst, String pris, String antalKursister, MultipartFile holdImage) throws IOException {
+    public void createHold(String name, String underOverskrift, String tekst, String pris, int antalKursister, MultipartFile holdImage) throws IOException {
 
         holdRepository.save(Hold.builder()
                 .name(name)
