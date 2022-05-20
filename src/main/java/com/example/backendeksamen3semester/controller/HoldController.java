@@ -21,20 +21,20 @@ import java.util.Optional;
 public class HoldController {
 
     private final HoldService holdService;
-    private HoldRepository holdRepository;
 
     @Autowired
     public HoldController(HoldService holdService){
         this.holdService = holdService;
     }
 
-    @PostMapping
-    public ResponseEntity<Hold> createHold(@RequestParam("name") String name, @RequestParam("underOverskrift") String underOverskrift, @RequestParam("tekst") String tekst, @RequestParam("pris") String pris, @RequestParam("antalKursister") String antalKursister, @RequestParam("holdImage") MultipartFile holdImage) throws IOException {
+    @PostMapping("/upload/image")
+    public ResponseEntity<Hold> createHold(@RequestParam("name") String name, @RequestParam("underOverskrift") String underOverskrift, @RequestParam("tekst") String tekst, @RequestParam("pris") String pris, @RequestParam("antalKursister") int antalKursister, @RequestParam("holdImage") MultipartFile holdImage) throws IOException {
         holdService.createHold(name, underOverskrift, tekst, pris, antalKursister, holdImage);
         return new ResponseEntity<>(HttpStatus.OK);
+
     }
 
-    @GetMapping()
+    @GetMapping
     public List<Hold> getHold(){
         return holdService.getallHold();
     }
@@ -49,13 +49,15 @@ public class HoldController {
     }
 
     @GetMapping("/{id}")
-    public Hold findHoldById(@PathVariable Long id) throws IOException {
+    public Hold findHoldById(@PathVariable Long id) throws IOException{
         Optional<Hold> obj = holdService.getHoldId(id);
-        if (obj.isPresent()) {
-            return obj.get();
-        } else {
-            return null;
-        }
+        //if (obj.isPresent()) {
+        //    return obj.get();
+        //} else {
+        //    return null;
+        //}
+        //shortened version of the above
+        return obj.orElse(null);
     }
 
     @PutMapping("/{id}")
