@@ -4,7 +4,6 @@ import com.example.backendeksamen3semester.Utils.ImageUtility;
 import com.example.backendeksamen3semester.model.Hold;
 import com.example.backendeksamen3semester.repository.HoldRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.AutoConfigurationPackage;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
