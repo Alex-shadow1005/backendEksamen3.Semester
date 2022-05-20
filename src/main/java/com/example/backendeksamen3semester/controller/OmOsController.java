@@ -1,5 +1,6 @@
 package com.example.backendeksamen3semester.controller;
 
+import com.example.backendeksamen3semester.model.Nyhed;
 import com.example.backendeksamen3semester.model.OmOs;
 import com.example.backendeksamen3semester.service.OmOsService;
 import org.springframework.beans.factory.annotation.Autowired;
