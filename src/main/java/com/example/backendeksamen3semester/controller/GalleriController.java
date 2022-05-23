@@ -2,6 +2,7 @@ package com.example.backendeksamen3semester.controller;
 
 import com.example.backendeksamen3semester.Utils.ImageUtility;
 import com.example.backendeksamen3semester.model.Galleri;
+import com.example.backendeksamen3semester.model.Hold;
 import com.example.backendeksamen3semester.repository.GalleriRepository;
 import com.example.backendeksamen3semester.service.GalleriService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,15 +19,19 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+@RequestMapping("/api/galleri")
 @RestController
 @CrossOrigin
 public class GalleriController {
 
-    @Autowired
-    GalleriRepository galleriRepository;
+    //GalleriRepository galleriRepository;
+    GalleriService galleriService;
 
     @Autowired
-    GalleriService galleriService;
+    public GalleriController( GalleriService galleriService) {
+        this.galleriService = galleriService;
+    }
+
     // Metode fra https://www.techgeeknext.com/spring-boot/spring-boot-upload-image
     @PostMapping("/upload/image")
     public ResponseEntity<ImageUploadResponse> uploadImage(@RequestParam("image") MultipartFile file)
@@ -38,7 +43,7 @@ public class GalleriController {
                         file.getOriginalFilename()));
     }
 
-    @GetMapping("/galleri")
+    @GetMapping
     public List<String> getAllImageNames() {
         return galleriService.getAll();
 
@@ -59,11 +64,12 @@ public class GalleriController {
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<String> deleteImage(@PathVariable Integer id) {
         try {
-            galleriRepository.deleteById(id);
+            galleriService.deleteById(id);
             return new ResponseEntity<>("Slettet id=" + id, HttpStatus.OK);
         } catch (Exception err){
             return new ResponseEntity<>("Jeg kunnne ikke slet id=" + id, HttpStatus.NOT_FOUND);
         }
+
 
     }
 

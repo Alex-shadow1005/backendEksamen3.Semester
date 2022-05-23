@@ -2,6 +2,7 @@ package com.example.backendeksamen3semester.service;
 
 import com.example.backendeksamen3semester.Utils.ImageUtility;
 import com.example.backendeksamen3semester.model.Hold;
+import com.example.backendeksamen3semester.model.OmOs;
 import com.example.backendeksamen3semester.repository.HoldRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,17 +22,23 @@ public class HoldService {
         this.holdRepository = holdRepository;
     }
 
-    public void createHold(String name, String underOverskrift, String tekst, String pris, int antalKursister, MultipartFile holdImage) throws IOException {
+
+    public void create(Hold hold){
+        holdRepository.save(hold);
+    }
+    /*public void createHold(Hold hold) throws IOException {
 
         holdRepository.save(Hold.builder()
-                .name(name)
-                .underOverskrift(underOverskrift)
-                .tekst(tekst)
-                .pris(pris)
-                .antalKursister(antalKursister)
+                .name(hold.getName())
+                .underOverskrift(hold.getUnderOverskrift())
+                .tekst(hold.getTekst())
+                .pris(hold.getPris())
+                .antalKursister(hold.getAntalKursister())
                 .type(holdImage.getContentType())
                 .holdImage(ImageUtility.compressImage(holdImage.getBytes())).build());
     }
+
+     */
 
     public List<Hold> getallHold(){
         return holdRepository.findAll();

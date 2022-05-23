@@ -2,6 +2,7 @@ package com.example.backendeksamen3semester.service;
 
 import com.example.backendeksamen3semester.Utils.ImageUtility;
 import com.example.backendeksamen3semester.model.Galleri;
+import com.example.backendeksamen3semester.model.Hold;
 import com.example.backendeksamen3semester.repository.GalleriRepository;
 import com.example.backendeksamen3semester.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,6 +42,14 @@ public class GalleriService {
 
     public Optional<Galleri> getImg(String name) throws IOException {
         return galleriRepository.findByName(name);
+    }
+
+    public void deleteById(Integer id){
+        galleriRepository.deleteById(id);
+    }
+
+    public Galleri updateGalleri(Galleri galleri){
+        return galleriRepository.save(galleri);
     }
 
 }

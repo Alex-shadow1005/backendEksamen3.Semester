@@ -17,7 +17,7 @@ public class Galleri {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     @Column(name = "galleriid", updatable = false, nullable = false)
-    private int galleriid;
+    private int galleriId;
 
     @Column(name = "name")
     private String name;
@@ -29,4 +29,36 @@ public class Galleri {
     private byte[] image;
 
 
+
+    public int getGalleriId() {
+        return galleriId;
+    }
+
+    public void setGalleriId(int galleriId) {
+        this.galleriId = galleriId;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public byte[] getImage() {
+        return image;
+    }
+
+    public void setImage(byte[] image) {
+        this.image = image;
+    }
 }
