@@ -37,7 +37,7 @@ public class HoldService {
         return holdRepository.findAll();
     }
 
-    public Hold getHold(Long id){ return holdRepository.findByHoldId(id);}
+
 
     public Optional<Hold> getHold(String name) throws IOException {
         return holdRepository.findByName(name);

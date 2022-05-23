@@ -28,8 +28,15 @@ public class HoldController {
     }
 
     @PostMapping("/upload/image")
-    public ResponseEntity<Hold> createHold(@RequestParam("name") String name, @RequestParam("underOverskrift") String underOverskrift, @RequestParam("tekst") String tekst, @RequestParam("pris") String pris, @RequestParam("antalKursister") int antalKursister, @RequestParam("holdImage") MultipartFile holdImage) throws IOException {
-        holdService.createHold(name, underOverskrift, tekst, pris, antalKursister, holdImage);
+    public ResponseEntity<Hold> createHold(@RequestParam("name") String name, @RequestParam("underOverskrift") String underOverskrift, @RequestParam("tekst") String tekst, @RequestParam("pris") String pris, @RequestParam("antalKursister") int antalKursister, @RequestParam("holdImage") MultipartFile holdImage) {
+        try {
+            holdService.createHold(name, underOverskrift, tekst, pris, antalKursister, holdImage);
+            return new ResponseEntity<>(HttpStatus.OK);
+        } catch(Exception e){
+            System.out.println("create hold error");
+            System.out.println(e.getMessage());
+        }
+
         return new ResponseEntity<>(HttpStatus.OK);
 
     }
