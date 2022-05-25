@@ -27,22 +27,22 @@ public class HoldController {
         this.holdService = holdService;
     }
 
-    @PostMapping
-    public ResponseEntity<Hold> create(@RequestBody Hold hold) throws IOException {
-        holdService.create(hold);
+    @PostMapping("/upload/image")
+    public ResponseEntity<Hold> createHold(@RequestParam("name") String name, @RequestParam("underOverskrift") String underOverskrift, @RequestParam("tekst") String tekst, @RequestParam("pris") String pris, @RequestParam("antalKursister") int antalKursister, @RequestParam("holdImage") MultipartFile holdImage) {
+        try {
+            holdService.createHold(name, underOverskrift, tekst, pris, antalKursister, holdImage);
+            return new ResponseEntity<>(HttpStatus.OK);
+        } catch(Exception e){
+            System.out.println("create hold error");
+            System.out.println(e.getMessage());
+        }
+
         return new ResponseEntity<>(HttpStatus.OK);
 
     }
-    /*@PostMapping
-    public ResponseEntity<Hold> createHold(@RequestBody Hold hold, @RequestBody MultipartFile holdImage) throws IOException {
-        holdService.createHold(hold, holdImage);
-        return new ResponseEntity<>(HttpStatus.OK);
-    }
-
-     */
 
     @GetMapping
-    public List<Hold> getHold(){
+    public List<Hold> getAllHold(){
         return holdService.getallHold();
     }
 
@@ -54,7 +54,7 @@ public class HoldController {
                 .contentType(MediaType.valueOf(hold.get().getType()))
                 .body(ImageUtility.decompressImage(hold.get().getHoldImage()));
     }
-
+    /*
     @GetMapping("/{id}")
     public Hold findHoldById(@PathVariable Long id) throws IOException{
         Optional<Hold> obj = holdService.getHoldId(id);
@@ -66,11 +66,12 @@ public class HoldController {
         //shortened version of the above
         return obj.orElse(null);
     }
+*/
+    @PostMapping("/{id}")
+    public ResponseEntity<Hold> updateHold(@PathVariable Long id, @RequestParam("name") String name, @RequestParam("underOverskrift") String underOverskrift, @RequestParam("tekst") String tekst, @RequestParam("pris") String pris, @RequestParam("antalKursister") int antalKursister, @RequestParam("holdImage") MultipartFile holdImage) throws IOException {
 
-    @PutMapping("/{id}")
-    public ResponseEntity<Hold> updateHold(@PathVariable Long id, @RequestBody Hold hold) {
-        hold.setHoldId(id);
-        return new ResponseEntity<>(holdService.updateHold(hold), HttpStatus.OK);
+        holdService.updateHold(id, name, underOverskrift, tekst, pris, antalKursister, holdImage);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")

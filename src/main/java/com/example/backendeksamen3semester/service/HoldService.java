@@ -44,6 +44,8 @@ public class HoldService {
         return holdRepository.findAll();
     }
 
+
+
     public Optional<Hold> getHold(String name) throws IOException {
         return holdRepository.findByName(name);
     }
@@ -56,8 +58,32 @@ public class HoldService {
         holdRepository.deleteById(id);
     }
 
-    public Hold updateHold(Hold hold){
-        return holdRepository.save(hold);
+    public void updateHold(Long id, String name, String underOverskrift, String tekst, String pris, int antalKursister, MultipartFile holdImage) throws IOException {
+        System.out.println("updateHold");
+        System.out.println("type: " + holdImage.getContentType());
+        holdRepository.updateHoldName(id, name);
+        holdRepository.updateHoldUnderOverskrift(id, underOverskrift);
+        holdRepository.updateHoldTekst(id, tekst);
+        holdRepository.updateHoldPris(id, pris);
+        holdRepository.updateHoldAntalKursister(id, antalKursister);
+        holdRepository.updateHoldType(id, holdImage.getContentType());
+        holdRepository.updateHoldImage(id, ImageUtility.compressImage(holdImage.getBytes()));
+
+
+
+        /*
+        holdRepository.save(Hold.builder()
+                .holdId(id)
+                .name(name)
+                .underOverskrift(underOverskrift)
+                .tekst(tekst)
+                .pris(pris)
+                .antalKursister(antalKursister)
+                .type(holdImage.getContentType())
+                .holdImage(ImageUtility.compressImage(holdImage.getBytes()))
+                .build());
+
+         */
     }
 
 }

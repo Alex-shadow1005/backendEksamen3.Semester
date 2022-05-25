@@ -27,7 +27,7 @@ public class Hold {
     private int antalKursister;
 
     private String type;
-    @Column(name = "hold_image", unique = false, nullable = false, length = 100000)
+    @Column(name = "hold_image", unique = false, nullable = false, length = 10000000)
     private byte[] holdImage;
 
 
