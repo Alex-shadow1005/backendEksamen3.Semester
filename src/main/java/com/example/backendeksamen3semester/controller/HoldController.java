@@ -67,7 +67,7 @@ public class HoldController {
         return obj.orElse(null);
     }
 */
-    @PutMapping("/{id}")
+    @PostMapping("/{id}")
     public ResponseEntity<Hold> updateHold(@PathVariable Long id, @RequestParam("name") String name, @RequestParam("underOverskrift") String underOverskrift, @RequestParam("tekst") String tekst, @RequestParam("pris") String pris, @RequestParam("antalKursister") int antalKursister, @RequestParam("holdImage") MultipartFile holdImage) throws IOException {
 
         holdService.updateHold(id, name, underOverskrift, tekst, pris, antalKursister, holdImage);

@@ -14,7 +14,7 @@ import java.util.Optional;
 
 public interface HoldRepository extends JpaRepository<Hold, Long> {
     Optional<Hold> findByName(String name);
-
+    Hold findByHoldId(Long id);
 
     @Modifying
     @Transactional
