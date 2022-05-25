@@ -6,6 +6,7 @@ import com.example.backendeksamen3semester.model.OmOs;
 import com.example.backendeksamen3semester.repository.HoldRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -22,23 +23,19 @@ public class HoldService {
         this.holdRepository = holdRepository;
     }
 
-
-    public void create(Hold hold){
-        holdRepository.save(hold);
-    }
-    /*public void createHold(Hold hold) throws IOException {
+    public void createHold(String name, String underOverskrift, String tekst, String pris, int antalKursister, MultipartFile holdImage) throws IOException {
 
         holdRepository.save(Hold.builder()
-                .name(hold.getName())
-                .underOverskrift(hold.getUnderOverskrift())
-                .tekst(hold.getTekst())
-                .pris(hold.getPris())
-                .antalKursister(hold.getAntalKursister())
+                .name(name)
+                .underOverskrift(underOverskrift)
+                .tekst(tekst)
+                .pris(pris)
+                .antalKursister(antalKursister)
                 .type(holdImage.getContentType())
                 .holdImage(ImageUtility.compressImage(holdImage.getBytes())).build());
     }
 
-     */
+
 
     public List<Hold> getallHold(){
         return holdRepository.findAll();
