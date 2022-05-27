@@ -44,6 +44,9 @@ class ApplicationTests {
 	void updateemailtest(){
 		Newsletter newsletter = new Newsletter();
 
+		//existsById(int) comes from CrudRepository
+		//JpaRepository -> PagingAndSortingRepository -> CrudRepository
+		//-> = extends
 		if(newsletterRepository.existsById(1)){
 			newsletter.setNewsletterid(1);
 			newsletter.setEmail("changedmail@gmail.com");

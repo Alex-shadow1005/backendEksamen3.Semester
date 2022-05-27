@@ -54,7 +54,7 @@ public class HoldController {
                 .contentType(MediaType.valueOf(hold.get().getType()))
                 .body(ImageUtility.decompressImage(hold.get().getHoldImage()));
     }
-    /*
+
     @GetMapping("/{id}")
     public Hold findHoldById(@PathVariable Long id) throws IOException{
         Optional<Hold> obj = holdService.getHoldId(id);
@@ -66,7 +66,7 @@ public class HoldController {
         //shortened version of the above
         return obj.orElse(null);
     }
-*/
+
     @PostMapping("/{id}")
     public ResponseEntity<Hold> updateHold(@PathVariable Long id, @RequestParam("name") String name, @RequestParam("underOverskrift") String underOverskrift, @RequestParam("tekst") String tekst, @RequestParam("pris") String pris, @RequestParam("antalKursister") int antalKursister, @RequestParam("holdImage") MultipartFile holdImage) throws IOException {
 
